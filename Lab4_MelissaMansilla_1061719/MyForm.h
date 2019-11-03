@@ -451,8 +451,6 @@ private: System::Void btnOrGenQS_Click(System::Object^  sender, System::EventArg
 			}
 		}
 		MostrarGen();
-		
-		MostrarGen();
 		Timer->Stop();
 		lblTiempoEj->Text = System::Convert::ToString(Timer->Elapsed);
 	}
