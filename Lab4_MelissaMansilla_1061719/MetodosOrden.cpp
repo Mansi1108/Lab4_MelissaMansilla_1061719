@@ -62,6 +62,35 @@ void MetodosOrden::QuickS(int* array, int inicio, int fin) {
 	}
 }
 
+bool MetodosOrden::IsSorted(int* data, int count) {
+	while (--count >= 1)
+	{
+		if (data[count] < data[count - 1])
+		{
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
+}
+void MetodosOrden::Shuffle(int* data, int count) {
+	int temp, rnd;
+	for (int i = 0; i < count; i++)
+	{
+		rnd = rand() % count;
+		temp = data[i];
+		data[i] = data[rnd];
+		data[rnd] = temp;
+	}
+}
+void MetodosOrden::Stupid(int* data, int count) {
+	while (!IsSorted(data, count))
+	{
+		Shuffle(data, count);
+	}
+}
+
 MetodosOrden::MetodosOrden()
 {
 }

@@ -1,3 +1,8 @@
 ﻿  MetodosOrden.cpp
+  MyForm.cpp
+d:\mansilla\url\labsprogra\lab4_melissamansilla_1061719\lab4_melissamansilla_1061719\myform.h(295): warning C4101: 'generacion': unreferenced local variable
+d:\mansilla\url\labsprogra\lab4_melissamansilla_1061719\lab4_melissamansilla_1061719\myform.h(355): warning C4101: 'generacion': unreferenced local variable
+  Generating Code...
+d:\mansilla\url\labsprogra\lab4_melissamansilla_1061719\lab4_melissamansilla_1061719\metodosorden.cpp(76): warning C4715: 'MetodosOrden::IsSorted': not all control paths return a value
   Lista.obj : MSIL module encountered; incremental linking is disabled for MSIL; performing full link
   Lab4_MelissaMansilla_1061719.vcxproj -> D:\Mansilla\URL\LabsProgra\Lab4_MelissaMansilla_1061719\Debug\Lab4_MelissaMansilla_1061719.exe
