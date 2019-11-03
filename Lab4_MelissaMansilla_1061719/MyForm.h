@@ -268,17 +268,139 @@ namespace Lab4MelissaMansilla1061719 {
 
 		
 #pragma endregion
-		
+		Lista* ListaP = new Lista();
+		Pokemon* PokemonP = new Pokemon();
+		MetodosOrden* Orden = new MetodosOrden();
+
+public: void MostrarGen() 
+{
+	StreamReader^ streamReader = gcnew StreamReader("..//Pokemonlista.txt");
+	String^ PokemonLista2 = streamReader->ReadToEnd();
+	int relleno[70] = { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+	int cont = 0;
+	
+	Nodo *aux = new Nodo();
+	aux = ListaP->HeadL; 
+	while (aux != nullptr && relleno[cont] == 0)
+	{
+		relleno[cont] = aux->numeroNac.numeNac; 
+		cont++;
+		aux = aux->siguiente;
+	}
+	cont = 0;
+	for (int j = 0; j < 70; j++)
+	{
+		StreamReader^ ListaPoke = gcnew StreamReader("..//Pokemonlista.txt");
+		int pos1 = 0;
+		int generacion;
+		bool find = false;
+		String^ name1;
+		String^ numNac1;
+		String^ NumGen1;
+		String^ aux1;
+		String^ string;
+		String^ fstring;
+		//Proceso que ayuda a encontrar si el numero nacional existe en la lista ya creada.
+		while (find == false)
+		{
+			string = ListaPoke->ReadLine();
+			fstring = string;
+
+			pos1 = string->IndexOf(",");
+			NumGen1 = string->Substring(0, pos1);
+			aux1 = string;
+			string = aux1->Substring(pos1 + 1);
+
+			pos1 = string->IndexOf(",");
+			numNac1 = string->Substring(0, pos1);
+			aux1 = string;
+			string = aux1->Substring(pos1 + 1);
+
+			pos1 = string->IndexOf(".");
+			name1 = string->Substring(0, pos1);
+			aux1 = string;
+			string = aux1->Substring(pos1 + 1);
+
+			int N = int::Parse(numNac1);// Conversion en la cual es vital para la comparación si este numero existe o no en la lista.
+			fstring = NumGen1 + ", " + numNac1 + ", " + name1;
+			if (N == relleno[cont]) //Validacion en la que se realiza si el numero obtenido en el readline es igual al del vector este se agrega a la lista del display, al aumentarse el contador aumenta el numero de linea a comparar.
+			{
+				find = true;
+				Pokedex->Items->Add(fstring);
+				cont++; 
+			}
+		}
+	}
+}
+public: void MostrarNac()
+{
+	StreamReader^ streamReader = gcnew StreamReader("..//Pokemonlista.txt");
+	String^ PokemonLista2 = streamReader->ReadToEnd();
+	int relleno[70] = { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 };
+	int cont = 0;
+
+	Nodo *aux = new Nodo();
+	aux = ListaP->HeadL;
+	while (aux != nullptr && relleno[cont] == 0)
+	{
+		relleno[cont] = aux->numeroNac.numeNac;
+		cont++;
+		aux = aux->siguiente;
+	}
+	cont = 0;
+	for (int j = 0; j < 70; j++)
+	{
+		StreamReader^ ListaPoke = gcnew StreamReader("..//Pokemonlista.txt");
+		int pos1 = 0;
+		int generacion;
+		bool find = false;
+		String^ name1;
+		String^ numNac1;
+		String^ NumGen1;
+		String^ aux1;
+		String^ string;
+		String^ fstring;
+		//Proceso que ayuda a encontrar si el numero nacional existe en la lista ya creada.
+		while (find == false)
+		{
+			string = ListaPoke->ReadLine();
+			fstring = string;
+
+			pos1 = string->IndexOf(",");
+			NumGen1 = string->Substring(0, pos1);
+			aux1 = string;
+			string = aux1->Substring(pos1 + 1);
+
+			pos1 = string->IndexOf(",");
+			numNac1 = string->Substring(0, pos1);
+			aux1 = string;
+			string = aux1->Substring(pos1 + 1);
+
+			pos1 = string->IndexOf(".");
+			name1 = string->Substring(0, pos1);
+			aux1 = string;
+			string = aux1->Substring(pos1 + 1);
+
+			int N = int::Parse(numNac1);// Conversion en la cual es vital para la comparación si este numero existe o no en la lista.
+			fstring = numNac1 + ", " + NumGen1 + ", " + name1;
+			if (N == relleno[cont]) //Validacion en la que se realiza si el numero obtenido en el readline es igual al del vector este se agrega a la lista del display, al aumentarse el contador aumenta el numero de linea a comparar.
+			{
+				find = true;
+				Pokedex->Items->Add(fstring);
+				cont++;
+			}
+		}
+	}
+}
 private: System::Void btnOrGenQS_Click(System::Object^  sender, System::EventArgs^  e) {
 		Stopwatch^ Timer = gcnew Stopwatch();
 		Timer->Start();
 		StreamReader^ streamReader = gcnew StreamReader("..//Pokemonlista.txt");
 		String^ PokemonLista = streamReader->ReadToEnd();
-		Pokedex->Items->Add(PokemonLista);
-		Timer->Stop();
-		lblTiempoEj->Text = System::Convert::ToString(Timer->Elapsed);
 
 		int pos;
+		int generacion;
+
 		String^ name;
 		String^ numNac;
 		String^ NumGen;
@@ -296,13 +418,43 @@ private: System::Void btnOrGenQS_Click(System::Object^  sender, System::EventArg
 			aux = PokemonLista;
 			PokemonLista = aux->Substring(pos + 1);
 
-			pos = PokemonLista->IndexOf(",");
+			pos = PokemonLista->IndexOf(".");
 			name = PokemonLista->Substring(0, pos);
 			aux = PokemonLista;
 			PokemonLista = aux->Substring(pos + 1);
 
+			PokemonP->gen = System::Convert::ToInt32(NumGen);
+			PokemonP->numeNac = System::Convert::ToInt32(numNac);
+			
+			int nacional = PokemonP->numeNac;
+			generacion = PokemonP->gen;
+			ListaP->Push(nacional);
+		}
+		Nodo* aux1;
+		int relleno[70] = { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 };
+		int i = 0;
+		aux1 = ListaP->HeadL;
+		while (aux1 != nullptr && relleno[i] == 0)
+		{
+			relleno[i] = aux1->numeroNac.numeNac;
+			aux1 = aux1->siguiente;
+			i++;
 		}
 
+		Orden->QuickS(relleno,0,70);
+
+		for (int j = 0; j < 70; j++)
+		{
+			if (relleno[j] != 0)
+			{
+				ListaP->Push(relleno[j]);
+			}
+		}
+		MostrarGen();
+		
+		MostrarGen();
+		Timer->Stop();
+		lblTiempoEj->Text = System::Convert::ToString(Timer->Elapsed);
 	}
 private: System::Void btnOrNumQS_Click(System::Object^  sender, System::EventArgs^  e) {
 		Stopwatch^ Timer = gcnew Stopwatch();
@@ -314,26 +466,127 @@ private: System::Void btnOrNumQS_Click(System::Object^  sender, System::EventArg
 		lblTiempoEj->Text = System::Convert::ToString(Timer->Elapsed);
 	}
 
-
 private: System::Void btnOrGenBS_Click(System::Object^  sender, System::EventArgs^  e) {
 	Stopwatch^ Timer = gcnew Stopwatch();
 	Timer->Start();
 	StreamReader^ streamReader = gcnew StreamReader("..//Pokemonlista.txt");
 	String^ PokemonLista = streamReader->ReadToEnd();
-	Pokedex->Items->Add(PokemonLista);
+
+	int pos;
+	int generacion;
+
+	String^ name;
+	String^ numNac;
+	String^ NumGen;
+	String^ aux;
+
+	while (PokemonLista != "")
+	{
+		pos = PokemonLista->IndexOf(",");
+		NumGen = PokemonLista->Substring(0, pos);
+		aux = PokemonLista;
+		PokemonLista = aux->Substring(pos + 1);
+
+		pos = PokemonLista->IndexOf(",");
+		numNac = PokemonLista->Substring(0, pos);
+		aux = PokemonLista;
+		PokemonLista = aux->Substring(pos + 1);
+
+		pos = PokemonLista->IndexOf(".");
+		name = PokemonLista->Substring(0, pos);
+		aux = PokemonLista;
+		PokemonLista = aux->Substring(pos + 1);
+
+		PokemonP->gen = System::Convert::ToInt32(NumGen);
+		PokemonP->numeNac = System::Convert::ToInt32(numNac);
+
+		int nacional = PokemonP->numeNac;
+		generacion = PokemonP->gen;
+		ListaP->Push(nacional);
+	}
+	Nodo* aux1;
+	int relleno[70] = { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 };
+	int i = 0;
+	aux1 = ListaP->HeadL;
+	while (aux1 != nullptr && relleno[i]==0)
+	{
+		relleno[i] = aux1->numeroNac.numeNac;
+		aux1 = aux1->siguiente;
+		i++;
+	}
+
+	Orden->BubbleS(relleno, 70);
+
+	for (int j = 0; j < 70; j++)
+	{
+		if (relleno[j] != 0)
+		{
+			ListaP->Push(relleno[j]);
+		}
+	}
+	MostrarGen();
 	Timer->Stop();
 	lblTiempoEj->Text = System::Convert::ToString(Timer->Elapsed);
-
-	int relleno[70] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-	int cont = 0;
-
 }
 private: System::Void btnOrNumBS_Click(System::Object^  sender, System::EventArgs^  e) {
 	Stopwatch^ Timer = gcnew Stopwatch();
 	Timer->Start();
 	StreamReader^ streamReader = gcnew StreamReader("..//Pokemonlista.txt");
 	String^ PokemonLista = streamReader->ReadToEnd();
-	Pokedex->Items->Add(PokemonLista);
+
+	int pos;
+	int generacion;
+
+	String^ name;
+	String^ numNac;
+	String^ NumGen;
+	String^ aux;
+
+	while (PokemonLista != "")
+	{
+		pos = PokemonLista->IndexOf(",");
+		NumGen = PokemonLista->Substring(0, pos);
+		aux = PokemonLista;
+		PokemonLista = aux->Substring(pos + 1);
+
+		pos = PokemonLista->IndexOf(",");
+		numNac = PokemonLista->Substring(0, pos);
+		aux = PokemonLista;
+		PokemonLista = aux->Substring(pos + 1);
+
+		pos = PokemonLista->IndexOf(".");
+		name = PokemonLista->Substring(0, pos);
+		aux = PokemonLista;
+		PokemonLista = aux->Substring(pos + 1);
+
+		PokemonP->gen = System::Convert::ToInt32(NumGen);
+		PokemonP->numeNac = System::Convert::ToInt32(numNac);
+
+		int nacional = PokemonP->numeNac;
+		generacion = PokemonP->gen;
+		ListaP->Push(nacional);
+	}
+	Nodo* aux1;
+	int relleno[70] = { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 };
+	int i = 0;
+	aux1 = ListaP->HeadL;
+	while (aux1 != nullptr && relleno[i] == 0)
+	{
+		relleno[i] = aux1->numeroNac.numeNac;
+		aux1 = aux1->siguiente;
+		i++;
+	}
+
+	Orden->BubbleS(relleno, 70);
+
+	for (int j = 0; j < 70; j++)
+	{
+		if (relleno[j] != 0)
+		{
+			ListaP->Push(relleno[j]);
+		}
+	}
+	MostrarNac();
 	Timer->Stop();
 	lblTiempoEj->Text = System::Convert::ToString(Timer->Elapsed);
 }

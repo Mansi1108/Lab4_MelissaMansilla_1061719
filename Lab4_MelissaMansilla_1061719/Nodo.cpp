@@ -5,6 +5,7 @@
 Nodo::Nodo()
 {
 	siguiente = nullptr;
+	anterior = nullptr;
 }
 
 

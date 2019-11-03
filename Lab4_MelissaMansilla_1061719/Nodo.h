@@ -1,12 +1,13 @@
 #pragma once
+#include "Pokemon.h"
 class Nodo
 {
 public:
 	Nodo* siguiente;
 	Nodo* anterior;
 public:
-	int numero;
-	int valor;
+	Pokemon numeroNac;
+	Pokemon numeroGen;
 public:
 	Nodo();
 	~Nodo();

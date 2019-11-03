@@ -17,3 +17,6 @@ Assembly System.Xml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c5619
 Class Lab4MelissaMansilla1061719.MyForm: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   :System.Windows.Forms.Form
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Methods:
+    MostrarGen(): PrivateScope, Public, HideBySig
+    MostrarNac(): PrivateScope, Public, HideBySig

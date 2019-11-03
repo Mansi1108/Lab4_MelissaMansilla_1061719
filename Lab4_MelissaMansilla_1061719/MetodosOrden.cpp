@@ -3,18 +3,18 @@
 #include<time.h>
 
 
-void MetodosOrden::BubbleS(int* A[], int n)
+void MetodosOrden::BubbleS(int* A, int n)
 {
 	int aux, i, j;
 	for (i = 0; i < n - 1; i++)
 	{
 		for (j = i + 1; j < n - 1; j++)
 		{
-			if (A[i] > A[j])
+			if (A[i] < A[j])
 			{
-				aux = *A[i];
+				aux = A[i];
 				A[i] = A[j];
-				*A[j] = aux;
+				A[j] = aux;
 			}
 		}
 	}

@@ -3,7 +3,7 @@
 class MetodosOrden
 {
 public:
-	void BubbleS(int* vec[], int num);
+	void BubbleS(int* vec, int num);
 
 	void QuickS(int* arr, int inicio, int fin);
 	int Dividir(int* arr, int inicio, int fin);

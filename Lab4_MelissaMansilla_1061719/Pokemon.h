@@ -3,7 +3,7 @@ class Pokemon
 {
 public: 
 	int gen;
-	int numNac;
+	int numeNac;
 public:
 	Pokemon();
 	~Pokemon();

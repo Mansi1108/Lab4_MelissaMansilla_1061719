@@ -1,12 +1,10 @@
 #include "Lista.h"
-
-
-
 Lista::Lista()
 {
+	HeadL = nullptr;
+	UltimoL = nullptr;
 	NElementos = 0;
 }
-
 
 Lista::~Lista()
 {
@@ -15,18 +13,18 @@ Lista::~Lista()
 void Lista::Push(int value) {
 
 	Nodo* NuevoV = new Nodo;
-	NuevoV->valor = value;
+	NuevoV->numeroNac.numeNac = value;
 	if (HeadL == nullptr)
 	{
 		HeadL = NuevoV;
 		UltimoL = NuevoV;
 		HeadL->anterior = UltimoL;
 		UltimoL->siguiente = HeadL;
-	}
+	} 
 	else
 	{
 		NuevoV->anterior = UltimoL;
-		NuevoV->siguiente = HeadL;
+		NuevoV->siguiente = HeadL; 
 		HeadL = NuevoV;
 		UltimoL->siguiente = HeadL;
 		(HeadL->siguiente)->anterior = HeadL;
