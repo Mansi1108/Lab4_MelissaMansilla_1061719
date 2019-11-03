@@ -133,16 +133,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Lista.cpp" />
     <ClCompile Include="MetodosOrden.cpp" />
     <ClCompile Include="MyForm.cpp" />
+    <ClCompile Include="Nodo.cpp" />
     <ClCompile Include="Pokemon.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Lista.h" />
     <ClInclude Include="MetodosOrden.h" />
     <ClInclude Include="MyForm.h">
       <FileType>CppForm</FileType>
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
+    <ClInclude Include="Nodo.h" />
     <ClInclude Include="Pokemon.h" />
   </ItemGroup>
   <ItemGroup>

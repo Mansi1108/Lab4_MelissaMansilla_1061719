@@ -1,6 +1,8 @@
 #pragma once
 #include "Pokemon.h"
 #include "MetodosOrden.h"
+#include "Lista.h"
+#include "Nodo.h"
 
 namespace Lab4MelissaMansilla1061719 {
 
@@ -10,6 +12,8 @@ namespace Lab4MelissaMansilla1061719 {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace System::IO;
+	using namespace System::Diagnostics;
 
 	/// <summary>
 	/// Summary for MyForm
@@ -36,16 +40,27 @@ namespace Lab4MelissaMansilla1061719 {
 				delete components;
 			}
 		}
-	private: System::Windows::Forms::ListBox^  listBox1;
-	private: System::Windows::Forms::Button^  btnOrGen;
-	private: System::Windows::Forms::Button^  btnOrNum;
-	private: System::Windows::Forms::Button^  button1;
-	private: System::Windows::Forms::Button^  button2;
-	private: System::Windows::Forms::Button^  button3;
-	private: System::Windows::Forms::Button^  button4;
+	private: System::Windows::Forms::ListBox^  Pokedex;
+	protected:
+
+	private: System::Windows::Forms::Button^  btnOrGenQS;
+	private: System::Windows::Forms::Button^  btnOrNumQS;
+	private: System::Windows::Forms::Button^  btnOrNumBS;
+
+
+
+	private: System::Windows::Forms::Button^  btnOrGenBS;
+	private: System::Windows::Forms::Button^  btnOrNumBoS;
+
+
+
+	private: System::Windows::Forms::Button^  btnOrGenBoS;
+
 	private: System::Windows::Forms::Label^  lblQuick;
 	private: System::Windows::Forms::Label^  lblBubble;
 	private: System::Windows::Forms::Label^  label1;
+	private: System::Windows::Forms::Label^  label2;
+	private: System::Windows::Forms::Label^  lblTiempoEj;
 	protected:
 
 	private:
@@ -62,110 +77,118 @@ namespace Lab4MelissaMansilla1061719 {
 		void InitializeComponent(void)
 		{
 			System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(MyForm::typeid));
-			this->listBox1 = (gcnew System::Windows::Forms::ListBox());
-			this->btnOrGen = (gcnew System::Windows::Forms::Button());
-			this->btnOrNum = (gcnew System::Windows::Forms::Button());
-			this->button1 = (gcnew System::Windows::Forms::Button());
-			this->button2 = (gcnew System::Windows::Forms::Button());
-			this->button3 = (gcnew System::Windows::Forms::Button());
-			this->button4 = (gcnew System::Windows::Forms::Button());
+			this->Pokedex = (gcnew System::Windows::Forms::ListBox());
+			this->btnOrGenQS = (gcnew System::Windows::Forms::Button());
+			this->btnOrNumQS = (gcnew System::Windows::Forms::Button());
+			this->btnOrNumBS = (gcnew System::Windows::Forms::Button());
+			this->btnOrGenBS = (gcnew System::Windows::Forms::Button());
+			this->btnOrNumBoS = (gcnew System::Windows::Forms::Button());
+			this->btnOrGenBoS = (gcnew System::Windows::Forms::Button());
 			this->lblQuick = (gcnew System::Windows::Forms::Label());
 			this->lblBubble = (gcnew System::Windows::Forms::Label());
 			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->label2 = (gcnew System::Windows::Forms::Label());
+			this->lblTiempoEj = (gcnew System::Windows::Forms::Label());
 			this->SuspendLayout();
 			// 
-			// listBox1
+			// Pokedex
 			// 
-			this->listBox1->BackColor = System::Drawing::Color::SkyBlue;
-			this->listBox1->BorderStyle = System::Windows::Forms::BorderStyle::None;
-			this->listBox1->Font = (gcnew System::Drawing::Font(L"NSimSun", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->Pokedex->BackColor = System::Drawing::Color::SkyBlue;
+			this->Pokedex->BorderStyle = System::Windows::Forms::BorderStyle::None;
+			this->Pokedex->Font = (gcnew System::Drawing::Font(L"NSimSun", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->listBox1->FormattingEnabled = true;
-			this->listBox1->ItemHeight = 24;
-			this->listBox1->Location = System::Drawing::Point(259, 85);
-			this->listBox1->Name = L"listBox1";
-			this->listBox1->RightToLeft = System::Windows::Forms::RightToLeft::No;
-			this->listBox1->Size = System::Drawing::Size(425, 384);
-			this->listBox1->TabIndex = 0;
-			this->listBox1->UseWaitCursor = true;
+			this->Pokedex->FormattingEnabled = true;
+			this->Pokedex->ItemHeight = 24;
+			this->Pokedex->Location = System::Drawing::Point(259, 85);
+			this->Pokedex->Name = L"Pokedex";
+			this->Pokedex->RightToLeft = System::Windows::Forms::RightToLeft::No;
+			this->Pokedex->Size = System::Drawing::Size(425, 384);
+			this->Pokedex->TabIndex = 0;
+			this->Pokedex->UseWaitCursor = true;
 			// 
-			// btnOrGen
+			// btnOrGenQS
 			// 
-			this->btnOrGen->BackColor = System::Drawing::SystemColors::Highlight;
-			this->btnOrGen->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
-			this->btnOrGen->Font = (gcnew System::Drawing::Font(L"NSimSun", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->btnOrGenQS->BackColor = System::Drawing::SystemColors::Highlight;
+			this->btnOrGenQS->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
+			this->btnOrGenQS->Font = (gcnew System::Drawing::Font(L"NSimSun", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->btnOrGen->Location = System::Drawing::Point(73, 102);
-			this->btnOrGen->Name = L"btnOrGen";
-			this->btnOrGen->Size = System::Drawing::Size(146, 68);
-			this->btnOrGen->TabIndex = 1;
-			this->btnOrGen->Text = L"Generation #";
-			this->btnOrGen->UseVisualStyleBackColor = false;
+			this->btnOrGenQS->Location = System::Drawing::Point(73, 102);
+			this->btnOrGenQS->Name = L"btnOrGenQS";
+			this->btnOrGenQS->Size = System::Drawing::Size(146, 68);
+			this->btnOrGenQS->TabIndex = 1;
+			this->btnOrGenQS->Text = L"Generation #";
+			this->btnOrGenQS->UseVisualStyleBackColor = false;
+			this->btnOrGenQS->Click += gcnew System::EventHandler(this, &MyForm::btnOrGenQS_Click);
 			// 
-			// btnOrNum
+			// btnOrNumQS
 			// 
-			this->btnOrNum->BackColor = System::Drawing::SystemColors::Highlight;
-			this->btnOrNum->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
-			this->btnOrNum->Font = (gcnew System::Drawing::Font(L"NSimSun", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->btnOrNumQS->BackColor = System::Drawing::SystemColors::Highlight;
+			this->btnOrNumQS->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
+			this->btnOrNumQS->Font = (gcnew System::Drawing::Font(L"NSimSun", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->btnOrNum->Location = System::Drawing::Point(73, 187);
-			this->btnOrNum->Name = L"btnOrNum";
-			this->btnOrNum->Size = System::Drawing::Size(146, 68);
-			this->btnOrNum->TabIndex = 2;
-			this->btnOrNum->Text = L"National #";
-			this->btnOrNum->UseVisualStyleBackColor = false;
+			this->btnOrNumQS->Location = System::Drawing::Point(73, 187);
+			this->btnOrNumQS->Name = L"btnOrNumQS";
+			this->btnOrNumQS->Size = System::Drawing::Size(146, 68);
+			this->btnOrNumQS->TabIndex = 2;
+			this->btnOrNumQS->Text = L"National #";
+			this->btnOrNumQS->UseVisualStyleBackColor = false;
+			this->btnOrNumQS->Click += gcnew System::EventHandler(this, &MyForm::btnOrNumQS_Click);
 			// 
-			// button1
+			// btnOrNumBS
 			// 
-			this->button1->BackColor = System::Drawing::SystemColors::Highlight;
-			this->button1->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
-			this->button1->Font = (gcnew System::Drawing::Font(L"NSimSun", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->btnOrNumBS->BackColor = System::Drawing::SystemColors::Highlight;
+			this->btnOrNumBS->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
+			this->btnOrNumBS->Font = (gcnew System::Drawing::Font(L"NSimSun", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->button1->Location = System::Drawing::Point(73, 399);
-			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(146, 68);
-			this->button1->TabIndex = 4;
-			this->button1->Text = L"National #";
-			this->button1->UseVisualStyleBackColor = false;
+			this->btnOrNumBS->Location = System::Drawing::Point(73, 399);
+			this->btnOrNumBS->Name = L"btnOrNumBS";
+			this->btnOrNumBS->Size = System::Drawing::Size(146, 68);
+			this->btnOrNumBS->TabIndex = 4;
+			this->btnOrNumBS->Text = L"National #";
+			this->btnOrNumBS->UseVisualStyleBackColor = false;
+			this->btnOrNumBS->Click += gcnew System::EventHandler(this, &MyForm::btnOrNumBS_Click);
 			// 
-			// button2
+			// btnOrGenBS
 			// 
-			this->button2->BackColor = System::Drawing::SystemColors::Highlight;
-			this->button2->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
-			this->button2->Font = (gcnew System::Drawing::Font(L"NSimSun", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->btnOrGenBS->BackColor = System::Drawing::SystemColors::Highlight;
+			this->btnOrGenBS->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
+			this->btnOrGenBS->Font = (gcnew System::Drawing::Font(L"NSimSun", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->button2->Location = System::Drawing::Point(73, 314);
-			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(146, 68);
-			this->button2->TabIndex = 3;
-			this->button2->Text = L"Generation #";
-			this->button2->UseVisualStyleBackColor = false;
+			this->btnOrGenBS->Location = System::Drawing::Point(73, 314);
+			this->btnOrGenBS->Name = L"btnOrGenBS";
+			this->btnOrGenBS->Size = System::Drawing::Size(146, 68);
+			this->btnOrGenBS->TabIndex = 3;
+			this->btnOrGenBS->Text = L"Generation #";
+			this->btnOrGenBS->UseVisualStyleBackColor = false;
+			this->btnOrGenBS->Click += gcnew System::EventHandler(this, &MyForm::btnOrGenBS_Click);
 			// 
-			// button3
+			// btnOrNumBoS
 			// 
-			this->button3->BackColor = System::Drawing::SystemColors::Highlight;
-			this->button3->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
-			this->button3->Font = (gcnew System::Drawing::Font(L"NSimSun", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->btnOrNumBoS->BackColor = System::Drawing::SystemColors::Highlight;
+			this->btnOrNumBoS->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
+			this->btnOrNumBoS->Font = (gcnew System::Drawing::Font(L"NSimSun", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->button3->Location = System::Drawing::Point(717, 206);
-			this->button3->Name = L"button3";
-			this->button3->Size = System::Drawing::Size(146, 68);
-			this->button3->TabIndex = 6;
-			this->button3->Text = L"National #";
-			this->button3->UseVisualStyleBackColor = false;
+			this->btnOrNumBoS->Location = System::Drawing::Point(717, 206);
+			this->btnOrNumBoS->Name = L"btnOrNumBoS";
+			this->btnOrNumBoS->Size = System::Drawing::Size(146, 68);
+			this->btnOrNumBoS->TabIndex = 6;
+			this->btnOrNumBoS->Text = L"National #";
+			this->btnOrNumBoS->UseVisualStyleBackColor = false;
+			this->btnOrNumBoS->Click += gcnew System::EventHandler(this, &MyForm::btnOrNumBoS_Click);
 			// 
-			// button4
+			// btnOrGenBoS
 			// 
-			this->button4->BackColor = System::Drawing::SystemColors::Highlight;
-			this->button4->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
-			this->button4->Font = (gcnew System::Drawing::Font(L"NSimSun", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->btnOrGenBoS->BackColor = System::Drawing::SystemColors::Highlight;
+			this->btnOrGenBoS->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
+			this->btnOrGenBoS->Font = (gcnew System::Drawing::Font(L"NSimSun", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->button4->Location = System::Drawing::Point(717, 121);
-			this->button4->Name = L"button4";
-			this->button4->Size = System::Drawing::Size(146, 68);
-			this->button4->TabIndex = 5;
-			this->button4->Text = L"Generation #";
-			this->button4->UseVisualStyleBackColor = false;
+			this->btnOrGenBoS->Location = System::Drawing::Point(717, 121);
+			this->btnOrGenBoS->Name = L"btnOrGenBoS";
+			this->btnOrGenBoS->Size = System::Drawing::Size(146, 68);
+			this->btnOrGenBoS->TabIndex = 5;
+			this->btnOrGenBoS->Text = L"Generation #";
+			this->btnOrGenBoS->UseVisualStyleBackColor = false;
+			this->btnOrGenBoS->Click += gcnew System::EventHandler(this, &MyForm::btnOrGenBoS_Click);
 			// 
 			// lblQuick
 			// 
@@ -197,6 +220,26 @@ namespace Lab4MelissaMansilla1061719 {
 			this->label1->TabIndex = 9;
 			this->label1->Text = L"Bogo Sort";
 			// 
+			// label2
+			// 
+			this->label2->AutoSize = true;
+			this->label2->BackColor = System::Drawing::Color::Transparent;
+			this->label2->Location = System::Drawing::Point(168, 522);
+			this->label2->Name = L"label2";
+			this->label2->Size = System::Drawing::Size(160, 20);
+			this->label2->TabIndex = 10;
+			this->label2->Text = L"Tiempo de Ejecución:";
+			// 
+			// lblTiempoEj
+			// 
+			this->lblTiempoEj->AutoSize = true;
+			this->lblTiempoEj->BackColor = System::Drawing::Color::Transparent;
+			this->lblTiempoEj->Location = System::Drawing::Point(334, 522);
+			this->lblTiempoEj->Name = L"lblTiempoEj";
+			this->lblTiempoEj->Size = System::Drawing::Size(71, 20);
+			this->lblTiempoEj->TabIndex = 11;
+			this->lblTiempoEj->Text = L"00:00:00";
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(9, 20);
@@ -204,22 +247,115 @@ namespace Lab4MelissaMansilla1061719 {
 			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
 			this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
 			this->ClientSize = System::Drawing::Size(976, 565);
+			this->Controls->Add(this->lblTiempoEj);
+			this->Controls->Add(this->label2);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->lblBubble);
 			this->Controls->Add(this->lblQuick);
-			this->Controls->Add(this->button3);
-			this->Controls->Add(this->button4);
-			this->Controls->Add(this->button1);
-			this->Controls->Add(this->button2);
-			this->Controls->Add(this->btnOrNum);
-			this->Controls->Add(this->btnOrGen);
-			this->Controls->Add(this->listBox1);
+			this->Controls->Add(this->btnOrNumBoS);
+			this->Controls->Add(this->btnOrGenBoS);
+			this->Controls->Add(this->btnOrNumBS);
+			this->Controls->Add(this->btnOrGenBS);
+			this->Controls->Add(this->btnOrNumQS);
+			this->Controls->Add(this->btnOrGenQS);
+			this->Controls->Add(this->Pokedex);
 			this->Name = L"MyForm";
 			this->Text = L"MyForm";
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
 		}
+
+		
 #pragma endregion
-	};
+		
+private: System::Void btnOrGenQS_Click(System::Object^  sender, System::EventArgs^  e) {
+		Stopwatch^ Timer = gcnew Stopwatch();
+		Timer->Start();
+		StreamReader^ streamReader = gcnew StreamReader("..//Pokemonlista.txt");
+		String^ PokemonLista = streamReader->ReadToEnd();
+		Pokedex->Items->Add(PokemonLista);
+		Timer->Stop();
+		lblTiempoEj->Text = System::Convert::ToString(Timer->Elapsed);
+
+		int pos;
+		String^ name;
+		String^ numNac;
+		String^ NumGen;
+		String^ aux;
+
+		while (PokemonLista != "")
+		{
+			pos = PokemonLista->IndexOf(",");
+			NumGen = PokemonLista->Substring(0, pos);
+			aux = PokemonLista;
+			PokemonLista = aux->Substring(pos + 1);
+
+			pos = PokemonLista->IndexOf(",");
+			numNac = PokemonLista->Substring(0, pos);
+			aux = PokemonLista;
+			PokemonLista = aux->Substring(pos + 1);
+
+			pos = PokemonLista->IndexOf(",");
+			name = PokemonLista->Substring(0, pos);
+			aux = PokemonLista;
+			PokemonLista = aux->Substring(pos + 1);
+
+		}
+
+	}
+private: System::Void btnOrNumQS_Click(System::Object^  sender, System::EventArgs^  e) {
+		Stopwatch^ Timer = gcnew Stopwatch();
+		Timer->Start();
+		StreamReader^ streamReader = gcnew StreamReader("..//Pokemonlista.txt");
+		String^ PokemonLista = streamReader->ReadToEnd();
+		Pokedex->Items->Add(PokemonLista);
+		Timer->Stop();
+		lblTiempoEj->Text = System::Convert::ToString(Timer->Elapsed);
+	}
+
+
+private: System::Void btnOrGenBS_Click(System::Object^  sender, System::EventArgs^  e) {
+	Stopwatch^ Timer = gcnew Stopwatch();
+	Timer->Start();
+	StreamReader^ streamReader = gcnew StreamReader("..//Pokemonlista.txt");
+	String^ PokemonLista = streamReader->ReadToEnd();
+	Pokedex->Items->Add(PokemonLista);
+	Timer->Stop();
+	lblTiempoEj->Text = System::Convert::ToString(Timer->Elapsed);
+
+	int relleno[70] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+	int cont = 0;
+
+}
+private: System::Void btnOrNumBS_Click(System::Object^  sender, System::EventArgs^  e) {
+	Stopwatch^ Timer = gcnew Stopwatch();
+	Timer->Start();
+	StreamReader^ streamReader = gcnew StreamReader("..//Pokemonlista.txt");
+	String^ PokemonLista = streamReader->ReadToEnd();
+	Pokedex->Items->Add(PokemonLista);
+	Timer->Stop();
+	lblTiempoEj->Text = System::Convert::ToString(Timer->Elapsed);
+}
+
+
+private: System::Void btnOrGenBoS_Click(System::Object^  sender, System::EventArgs^  e) {
+	Stopwatch^ Timer = gcnew Stopwatch();
+	Timer->Start();
+	StreamReader^ streamReader = gcnew StreamReader("..//Pokemonlista.txt");
+	String^ PokemonLista = streamReader->ReadToEnd();
+	Pokedex->Items->Add(PokemonLista);
+	Timer->Stop();
+	lblTiempoEj->Text = System::Convert::ToString(Timer->Elapsed);
+}
+private: System::Void btnOrNumBoS_Click(System::Object^  sender, System::EventArgs^  e) {
+	Stopwatch^ Timer = gcnew Stopwatch();
+	Timer->Start();
+	StreamReader^ streamReader = gcnew StreamReader("..//Pokemonlista.txt");
+	String^ PokemonLista = streamReader->ReadToEnd();
+	Pokedex->Items->Add(PokemonLista);
+	Timer->Stop();
+	lblTiempoEj->Text = System::Convert::ToString(Timer->Elapsed);
+}
+};
 }
