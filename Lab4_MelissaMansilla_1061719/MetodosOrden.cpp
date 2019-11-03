@@ -32,11 +32,11 @@ int MetodosOrden::Dividir(int* array, int inicio, int fin)
 
 	while (left < right)
 	{
-		while (array[right] > pivot)
+		while (array[right] < pivot)
 		{
 			right--;
 		}
-		while ((left < right) && (array[left] <= pivot))
+		while ((left < right) && (array[left] >= pivot)) 
 		{
 			left++;
 		}
